@@ -20,26 +20,29 @@ namespace ProNature_Biomarkt_GmbH
         }
         private void LoadingScreen_Load(object sender, EventArgs e)
         {
-            LoadingbarTimer.Start(); // Startet den Timer wenn LoadingScreen geöffnet wird.
+            LoadingbarTimer.Start(); // Starts timer when Loadingscreen opens
 
         }
         private void LoadingbarTimer_Tick(object sender, EventArgs e)
         {
             loadingBarValue+=2;
 
-            //Die Zahl neben Loading...
+            //The digit after the label "Loading.."
             lblLoadingProgress.Text = loadingBarValue.ToString() + "%";
 
-            //
+            //The Loadingbar gets the value from loadingBarValue
             LoadingProgressBar.Value = loadingBarValue;
             
             if ( loadingBarValue >= LoadingProgressBar.Maximum)
             {
                 LoadingbarTimer.Stop();
                 
-                // Hallo ich bin ein neuer Eintrag und sogleich eine Veränderung.
+                // Finish loading now show main menu screen
+                MainMenuScreen mainMenuScreen = new MainMenuScreen();
+                mainMenuScreen.Show();
 
-
+                // Hides LoadingScreen
+                this.Hide();
             }
         }
 
