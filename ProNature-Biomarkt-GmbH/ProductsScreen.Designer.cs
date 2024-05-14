@@ -175,7 +175,7 @@
             this.btnProductClear.ForeColor = System.Drawing.Color.White;
             this.btnProductClear.Location = new System.Drawing.Point(295, 140);
             this.btnProductClear.Name = "btnProductClear";
-            this.btnProductClear.Size = new System.Drawing.Size(102, 28);
+            this.btnProductClear.Size = new System.Drawing.Size(120, 28);
             this.btnProductClear.TabIndex = 11;
             this.btnProductClear.Text = "Felder Leeren";
             this.btnProductClear.UseVisualStyleBackColor = false;
@@ -186,7 +186,7 @@
             this.btnProductDelete.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(20)))), ((int)(((byte)(20)))));
             this.btnProductDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnProductDelete.ForeColor = System.Drawing.Color.White;
-            this.btnProductDelete.Location = new System.Drawing.Point(403, 140);
+            this.btnProductDelete.Location = new System.Drawing.Point(421, 140);
             this.btnProductDelete.Name = "btnProductDelete";
             this.btnProductDelete.Size = new System.Drawing.Size(87, 28);
             this.btnProductDelete.TabIndex = 12;

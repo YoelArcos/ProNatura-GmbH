@@ -21,6 +21,66 @@ namespace ProNature_Biomarkt_GmbH
         {
             InitializeComponent();
 
+            ShowProducts(); 
+        }
+
+        private void btnProductSafe_Click(object sender, EventArgs e)
+        {
+
+            if (textBoxProductName.Text == ""
+                || textBoxProductBrand.Text == ""
+                || comboBoxProductCategory.Text == ""
+                || textBoxProductPrice.Text == "")
+            {
+                MessageBox.Show("Bitte alle Felder ausfüllen");
+                return ;
+            }
+            string productName = textBoxProductName.Text;
+            string productBrand = textBoxProductBrand.Text;
+            string productCategory = comboBoxProductCategory.Text;
+            string productPrice = textBoxProductPrice.Text;
+
+            //save product name in Database (SQL).
+            
+            databaseConnection.Open();
+            string query = string.Format("insert into Products values('{0}','{1}','{2}','{3}')", productName, productBrand,productCategory ,productPrice);
+            SqlCommand sqlCommand = new SqlCommand(query, databaseConnection);
+            sqlCommand.ExecuteNonQuery();
+            databaseConnection.Close();
+            ClearAllFields();
+
+            ShowProducts(); 
+            
+        }
+
+        private void btnProductEdit_Click(object sender, EventArgs e)
+        {
+            ShowProducts();
+        }
+
+        private void btnProductClear_Click(object sender, EventArgs e)
+        {
+            //Clears inputs like "name, category price, etc"
+            ClearAllFields();
+        }
+        private void btnProductDelete_Click(object sender, EventArgs e)
+        {
+            ShowProducts();
+        }
+
+
+        private void ClearAllFields()
+        {
+            //Clears inputs like "name, category price, etc"
+            textBoxProductName.Text = "";
+            textBoxProductBrand.Text = "";
+            comboBoxProductCategory.Text = "";
+            textBoxProductPrice.Text = "";
+            comboBoxProductCategory.SelectedItem = null;
+        }
+
+        private void ShowProducts()
+        {
             //Start database
             databaseConnection.Open();
 
@@ -30,7 +90,7 @@ namespace ProNature_Biomarkt_GmbH
             //Only configuration (on hold) nothing happens yet
             //Creates new SQLAdapter with the command and the connection to the Database
             SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(query, databaseConnection);
-            
+
             // DataSet is the "item storage" right now it is empty
             var dataSet = new DataSet();
 
@@ -41,31 +101,10 @@ namespace ProNature_Biomarkt_GmbH
             productsDGV.DataSource = dataSet.Tables[0];
             productsDGV.Columns[0].Visible = false;
 
-            
+
 
             databaseConnection.Close();
         }
 
-        private void btnProductSafe_Click(object sender, EventArgs e)
-        {
-            string productName = textBoxProductName.Text;
-            
-            //save product name in Database (SQL).
-        }
-
-        private void btnProductEdit_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void btnProductClear_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void btnProductDelete_Click(object sender, EventArgs e)
-        {
-
-        }
     }
 }
