@@ -24,9 +24,10 @@ namespace ProNature_Biomarkt_GmbH
             ShowProducts(); 
         }
 
+        // Insert describe Product into table 
         private void btnProductSafe_Click(object sender, EventArgs e)
         {
-
+            // observes that every field is filled
             if (textBoxProductName.Text == ""
                 || textBoxProductBrand.Text == ""
                 || comboBoxProductCategory.Text == ""
@@ -35,18 +36,21 @@ namespace ProNature_Biomarkt_GmbH
                 MessageBox.Show("Bitte alle Felder ausfüllen");
                 return ;
             }
+
+            //User input 
             string productName = textBoxProductName.Text;
             string productBrand = textBoxProductBrand.Text;
             string productCategory = comboBoxProductCategory.Text;
             string productPrice = textBoxProductPrice.Text;
 
-            //save product name in Database (SQL).
+            //save product in Database (SQL).
             
             databaseConnection.Open();
             string query = string.Format("insert into Products values('{0}','{1}','{2}','{3}')", productName, productBrand,productCategory ,productPrice);
             SqlCommand sqlCommand = new SqlCommand(query, databaseConnection);
             sqlCommand.ExecuteNonQuery();
             databaseConnection.Close();
+
             ClearAllFields();
 
             ShowProducts(); 
@@ -99,6 +103,8 @@ namespace ProNature_Biomarkt_GmbH
 
             //dataSet infos will be transfered to the GridView of the Products
             productsDGV.DataSource = dataSet.Tables[0];
+
+            // to not show ID (first column) for better Graphical user experienceS
             productsDGV.Columns[0].Visible = false;
 
 
