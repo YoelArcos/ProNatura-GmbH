@@ -17,6 +17,8 @@ namespace ProNature_Biomarkt_GmbH
 
         // Connection to the Database
         private SqlConnection databaseConnection = new SqlConnection(@"Data Source = (LocalDB)\MSSQLLocalDB; AttachDbFilename=C:\Users\Yoela\OneDrive\Documents\Pro-Natur Biomarkt GmbH.mdf;Integrated Security = True; Connect Timeout = 30");
+
+        private int lastSelectedProductKey;
         public ProductsScreen()
         {
             InitializeComponent();
@@ -43,18 +45,23 @@ namespace ProNature_Biomarkt_GmbH
             string productCategory = comboBoxProductCategory.Text;
             string productPrice = textBoxProductPrice.Text;
 
-            //save product in Database (SQL).
-            
-            databaseConnection.Open();
-            string query = string.Format("insert into Products values('{0}','{1}','{2}','{3}')", productName, productBrand,productCategory ,productPrice);
-            SqlCommand sqlCommand = new SqlCommand(query, databaseConnection);
-            sqlCommand.ExecuteNonQuery();
-            databaseConnection.Close();
+           
+            string query = string.Format("insert into Products values('{0}','{1}','{2}','{3}')", productName, productBrand, productCategory, productPrice);
+           
+            //save product in Database (SQL)
+            ExecuteQuery(query);
 
             ClearAllFields();
 
             ShowProducts(); 
             
+        }
+            private void ExecuteQuery(string query)
+        {
+            databaseConnection.Open();
+            SqlCommand sqlCommand = new SqlCommand(query, databaseConnection);
+            sqlCommand.ExecuteNonQuery();
+            databaseConnection.Close();
         }
 
         private void btnProductEdit_Click(object sender, EventArgs e)
@@ -69,6 +76,15 @@ namespace ProNature_Biomarkt_GmbH
         }
         private void btnProductDelete_Click(object sender, EventArgs e)
         {
+            if (lastSelectedProductKey == 0)
+            {
+                MessageBox.Show("Bitte wähle zuerst ein Produkt aus");
+                return;
+            }
+            string query = string.Format("delete from Products where Id= {0};", lastSelectedProductKey);
+
+            //save product in Database (SQL)
+            ExecuteQuery(query);
             ShowProducts();
         }
 
@@ -112,5 +128,17 @@ namespace ProNature_Biomarkt_GmbH
             databaseConnection.Close();
         }
 
+        private void productsDGV_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            // Puts selected item in the upper Fields, for the deleting or edit porcess
+            textBoxProductName.Text = productsDGV.CurrentRow.Cells[1].Value.ToString();
+            textBoxProductBrand.Text = productsDGV.CurrentRow.Cells[2].Value.ToString();
+            comboBoxProductCategory.Text = productsDGV.CurrentRow.Cells[3].Value.ToString();
+            textBoxProductPrice.Text = productsDGV.CurrentRow.Cells[4].Value.ToString();
+
+            lastSelectedProductKey = (int)productsDGV.CurrentRow.Cells[0].Value;
+
+            Console.WriteLine(lastSelectedProductKey);
+        }
     }
 }
