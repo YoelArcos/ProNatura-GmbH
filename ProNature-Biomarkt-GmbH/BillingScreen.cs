@@ -21,11 +21,28 @@ namespace ProNature_Biomarkt_GmbH
         {
             
             InitializeComponent();
+
+            ShowProducts();
         }
 
         private void btnCreate_Click(object sender, EventArgs e)
         {
-            
+            if(textBoxCustomerName.Text == "" 
+                || textBoxCustomerAdress.Text == ""
+                || textBoxCustomerBillingPrice.Text == "")
+            {
+                MessageBox.Show("Bitte alle Felder ausfüllen");
+                return;
+            }
+            string costumerName = textBoxCustomerName.Text;
+            string costumerAdress = textBoxCustomerAdress.Text;
+            string customerBillingPrice = textBoxCustomerBillingPrice.Text;
+
+
+            string query = string.Format(@"Insert into Table values('{0}','{1}','{2}')", costumerName , costumerAdress, customerBillingPrice ); 
+            ExecuteQuery(query);
+
+            ShowProducts();
         }
 
         private void btnDelete_Click(object sender, EventArgs e)
