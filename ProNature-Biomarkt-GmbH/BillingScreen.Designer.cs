@@ -69,6 +69,7 @@
             this.dataGridViewBilling.AllowUserToResizeColumns = false;
             this.dataGridViewBilling.AllowUserToResizeRows = false;
             this.dataGridViewBilling.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.dataGridViewBilling.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
             this.dataGridViewBilling.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewBilling.Location = new System.Drawing.Point(12, 160);
             this.dataGridViewBilling.MultiSelect = false;
@@ -78,7 +79,7 @@
             this.dataGridViewBilling.RowTemplate.Height = 24;
             this.dataGridViewBilling.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridViewBilling.Size = new System.Drawing.Size(776, 278);
-            this.dataGridViewBilling.TabIndex = 2;
+            this.dataGridViewBilling.TabIndex = 13;
             this.dataGridViewBilling.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewBilling_CellContentClick);
             // 
             // btnCreate

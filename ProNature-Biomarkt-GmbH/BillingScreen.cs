@@ -21,8 +21,8 @@ namespace ProNature_Biomarkt_GmbH
         {
             
             InitializeComponent();
-
             ShowProducts();
+            
         }
 
         private void btnCreate_Click(object sender, EventArgs e)
@@ -41,8 +41,9 @@ namespace ProNature_Biomarkt_GmbH
 
             string query = string.Format(@"Insert into Table values('{0}','{1}','{2}')", costumerName , costumerAdress, customerBillingPrice ); 
             ExecuteQuery(query);
-
+            ClearAllFields();
             ShowProducts();
+
         }
 
         private void btnDelete_Click(object sender, EventArgs e)
@@ -52,9 +53,7 @@ namespace ProNature_Biomarkt_GmbH
 
         private void btnClearField_Click(object sender, EventArgs e)
         {
-            textBoxCustomerName.Text = "";
-            textBoxCustomerAdress.Text = "";
-            textBoxCustomerBillingPrice.Text = "";
+           ClearAllFields();
         }
 
         private void btnBackToMainMenu_Click(object sender, EventArgs e)
@@ -77,7 +76,11 @@ namespace ProNature_Biomarkt_GmbH
             //to fill the DataSet with sqlAdapter(query/command, databaseconnection)
             sqlDataAdapter.Fill(dataSet);
 
-            dataGridViewBilling.DataSource = dataSet;
+            dataGridViewBilling.DataSource = dataSet.Tables[0];
+
+            dataGridViewBilling.Columns[0].Visible = false;
+
+            dataConnection.Close();
 
         }
         private void ExecuteQuery(string query)
@@ -90,8 +93,15 @@ namespace ProNature_Biomarkt_GmbH
             dataConnection.Close();
         }
 
+        private void ClearAllFields()
+        {
+            textBoxCustomerName.Text = "";
+            textBoxCustomerAdress.Text = "";
+            textBoxCustomerBillingPrice.Text = "";
+        }
         private void dataGridViewBilling_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
+            
 
         }
     }

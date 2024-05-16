@@ -160,5 +160,13 @@ namespace ProNature_Biomarkt_GmbH
 
             Console.WriteLine(lastSelectedProductKey);
         }
+
+        private void btnBackToMainMenu_Click(object sender, EventArgs e)
+        {
+            MainMenuScreen mainMenuScreen = new MainMenuScreen();
+            mainMenuScreen.Show();
+            this.Hide();
+
+        }
     }
 }
