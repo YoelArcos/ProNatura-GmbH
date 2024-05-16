@@ -28,6 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(BillingScreen));
             this.textBoxCustomerName = new System.Windows.Forms.TextBox();
             this.lblCustomerName = new System.Windows.Forms.Label();
@@ -40,6 +42,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.textBoxCustomerBillingPrice = new System.Windows.Forms.TextBox();
             this.btnBackToMainMenu = new System.Windows.Forms.Button();
+            this.btnCreateBill = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewBilling)).BeginInit();
             this.SuspendLayout();
             // 
@@ -70,7 +73,23 @@
             this.dataGridViewBilling.AllowUserToResizeRows = false;
             this.dataGridViewBilling.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.dataGridViewBilling.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.DarkGray;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.ControlDarkDark;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridViewBilling.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridViewBilling.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.DarkGray;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.ControlDarkDark;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridViewBilling.DefaultCellStyle = dataGridViewCellStyle2;
             this.dataGridViewBilling.Location = new System.Drawing.Point(12, 160);
             this.dataGridViewBilling.MultiSelect = false;
             this.dataGridViewBilling.Name = "dataGridViewBilling";
@@ -160,6 +179,16 @@
             this.btnBackToMainMenu.UseVisualStyleBackColor = true;
             this.btnBackToMainMenu.Click += new System.EventHandler(this.btnBackToMainMenu_Click);
             // 
+            // btnCreateBill
+            // 
+            this.btnCreateBill.Location = new System.Drawing.Point(601, 97);
+            this.btnCreateBill.Name = "btnCreateBill";
+            this.btnCreateBill.Size = new System.Drawing.Size(113, 47);
+            this.btnCreateBill.TabIndex = 14;
+            this.btnCreateBill.Text = "Rechnung drucken";
+            this.btnCreateBill.UseVisualStyleBackColor = true;
+            this.btnCreateBill.Click += new System.EventHandler(this.btnCreateBill_Click);
+            // 
             // BillingScreen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -167,6 +196,7 @@
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(20)))), ((int)(((byte)(20)))));
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.btnCreateBill);
             this.Controls.Add(this.btnBackToMainMenu);
             this.Controls.Add(this.textBoxCustomerBillingPrice);
             this.Controls.Add(this.label1);
@@ -200,5 +230,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox textBoxCustomerBillingPrice;
         private System.Windows.Forms.Button btnBackToMainMenu;
+        private System.Windows.Forms.Button btnCreateBill;
     }
 }

@@ -48,7 +48,7 @@ namespace ProNature_Biomarkt_GmbH
            
             string query = string.Format("insert into Products values('{0}','{1}','{2}','{3}')", productName, productBrand, productCategory, productPrice);
            
-            //save product in Database (SQL)
+            //save product in Database (SQL) 
             ExecuteQuery(query);
 
             ClearAllFields();
@@ -150,7 +150,7 @@ namespace ProNature_Biomarkt_GmbH
 
         private void productsDGV_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            // Puts selected item in the upper Fields, for the deleting or edit porcess
+            // Puts selected item in the upper Fields, for the deleting or edit process
             textBoxProductName.Text = productsDGV.CurrentRow.Cells[1].Value.ToString();
             textBoxProductBrand.Text = productsDGV.CurrentRow.Cells[2].Value.ToString();
             comboBoxProductCategory.Text = productsDGV.CurrentRow.Cells[3].Value.ToString();
@@ -158,7 +158,7 @@ namespace ProNature_Biomarkt_GmbH
 
             lastSelectedProductKey = (int)productsDGV.CurrentRow.Cells[0].Value;
 
-            Console.WriteLine(lastSelectedProductKey);
+            //Console.WriteLine(lastSelectedProductKey);
         }
 
         private void btnBackToMainMenu_Click(object sender, EventArgs e)

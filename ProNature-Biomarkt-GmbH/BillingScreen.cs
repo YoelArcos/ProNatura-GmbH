@@ -5,6 +5,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.Remoting.Contexts;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -14,13 +15,14 @@ namespace ProNature_Biomarkt_GmbH
     public partial class BillingScreen : Form
     {
 
-        private SqlConnection dataConnection = new SqlConnection( @"Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=\C:\\Users\\Yoela\\OneDrive\\Documents\\Pro-Natur Rechnungs Datenbank.mdf\;Integrated Security=True;Connect Timeout=30");
+        private SqlConnection dataConnection = new SqlConnection(@"Data Source = (LocalDB)\MSSQLLocalDB; AttachDbFilename=C:\Users\Yoela\OneDrive\Documents\Pro-Natur-Rechnung.mdf;Integrated Security = True; Connect Timeout = 30");
 
         private int lastSelectedField;
         public BillingScreen()
         {
             
             InitializeComponent();
+            
             ShowProducts();
             
         }
@@ -39,7 +41,7 @@ namespace ProNature_Biomarkt_GmbH
             string customerBillingPrice = textBoxCustomerBillingPrice.Text;
 
 
-            string query = string.Format(@"Insert into Table values('{0}','{1}','{2}')", costumerName , costumerAdress, customerBillingPrice ); 
+            string query = string.Format(@"Insert into Billing values('{0}','{1}','{2}')", costumerName , costumerAdress, customerBillingPrice ); 
             ExecuteQuery(query);
             ClearAllFields();
             ShowProducts();
@@ -48,6 +50,19 @@ namespace ProNature_Biomarkt_GmbH
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
+            if( lastSelectedField == 0)
+            {
+                MessageBox.Show("Bitte wählen Sie zuerst eine Zeile");
+                return;
+            }
+            
+            
+
+            string query = string.Format(@"Delete from Billing where Id= {0}", lastSelectedField);
+
+            ExecuteQuery(query);
+            ClearAllFields();
+            ShowProducts(); 
 
         }
 
@@ -65,9 +80,10 @@ namespace ProNature_Biomarkt_GmbH
 
         private void ShowProducts()
         {
+           
             dataConnection.Open();
 
-            string query = "select * from Table";
+            string query = "select * from Billing";
 
             SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(query, dataConnection);
 
@@ -81,6 +97,7 @@ namespace ProNature_Biomarkt_GmbH
             dataGridViewBilling.Columns[0].Visible = false;
 
             dataConnection.Close();
+            
 
         }
         private void ExecuteQuery(string query)
@@ -102,7 +119,29 @@ namespace ProNature_Biomarkt_GmbH
         private void dataGridViewBilling_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             
+            textBoxCustomerName.Text= dataGridViewBilling.CurrentRow.Cells[1].Value.ToString();
+            textBoxCustomerAdress.Text = dataGridViewBilling.CurrentRow.Cells[2].Value.ToString();
+            textBoxCustomerBillingPrice.Text = dataGridViewBilling.CurrentRow.Cells[3].Value.ToString();
 
+            lastSelectedField = (int)dataGridViewBilling.CurrentRow.Cells[0].Value;
+        }
+
+        private void btnCreateBill_Click(object sender, EventArgs e)
+        {
+            /*
+            textBoxCustomerName.Text = dataGridViewBilling.CurrentRow.Cells[1].Value.ToString();
+            textBoxCustomerAdress.Text = dataGridViewBilling.CurrentRow.Cells[2].Value.ToString();
+            textBoxCustomerBillingPrice.Text = dataGridViewBilling.CurrentRow.Cells[3].Value.ToString();
+            */
+
+
+            string customerName = textBoxCustomerName.Text;
+            string customerAdress = textBoxCustomerAdress.Text;
+            string customerBillingPrice = textBoxCustomerBillingPrice.Text;
+
+
+            string printCustomerBill = string.Format(@"Recipe: '{0}', '{1}', '{2}'", customerName, customerAdress, customerBillingPrice);
+            MessageBox.Show(printCustomerBill);
         }
     }
 }
