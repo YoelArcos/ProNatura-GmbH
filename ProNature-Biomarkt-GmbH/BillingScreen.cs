@@ -19,6 +19,7 @@ namespace ProNature_Biomarkt_GmbH
         private int lastSelectedField;
         public BillingScreen()
         {
+            
             InitializeComponent();
         }
 
